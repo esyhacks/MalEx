@@ -29,7 +29,7 @@ This tool is designed for controlled environments such as **virtual machines** a
 - Phishing URLs stored in `%temp%\MalEx\urls.txt` (Phishing URLs resource: [OpenPhish](https://openphish.com)).
 
 ## Warning
-- This script executes potentially harmful files. Use in a controlled environment.
+- This script executes potentially harmful files. Use in a controlled environment - a VM.
 - Ensure proper authorization before running.
 
 ## License
