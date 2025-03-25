@@ -1,6 +1,7 @@
+@echo off
+
 REM Use at your own risk. The author hold no liability for any damage caused by malware.
 
-@echo off
 title MalEx
 setlocal enableextensions 
 setlocal enabledelayedexpansion
