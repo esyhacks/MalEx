@@ -1,7 +1,7 @@
 # MalEx - Malware Execution Automation Script
 
 ## Overview
-**MalEx** is a **malware execution automation script** designed for cybersecurity research. It tests the effectiveness of **antivirus software** by executing malware samples and logging their detection status. Additionally, it includes an **anti-phishing test** to evaluate browser security against malicious URLs. Note that this script itself not malicious. However, you can use this script to execute any file on Windows platform and this script basically checks whether the execution was successful or not and continues until the end.
+**MalEx** is a **malware execution automation script** designed for cybersecurity research. It tests the effectiveness of **antivirus software** by executing malware samples and logging their detection status. Additionally, it includes an **anti-phishing test** to evaluate browser security against malicious URLs. Note that this script itself not malicious. However, you can use this script to execute any file on Windows platform and it basically checks whether the execution was successful or not and continues until the end.
 
 This tool is designed for controlled environments such as **virtual machines** and **sandboxed environments** for cybersecurity research.
 
