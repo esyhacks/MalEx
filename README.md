@@ -26,7 +26,7 @@ This tool is designed for controlled environments such as **virtual machines** a
 
 ## Logs
 - Execution details stored in `%temp%\MalEx\events.log`.
-- Phishing URLs stored in `%temp%\MalEx\urls.txt` (Phishing URLs resource: [OpenPhish](https://openphish.com).
+- Phishing URLs stored in `%temp%\MalEx\urls.txt` (Phishing URLs resource: [OpenPhish](https://openphish.com)).
 
 ## Warning
 - This script executes potentially harmful files. Use in a controlled environment.
