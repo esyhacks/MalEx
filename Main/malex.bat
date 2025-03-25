@@ -25,7 +25,7 @@ if exist %logfile% (
 call :logger "Logging start ----------"
 
 echo.
-echo           ~~~ Malware Execution Automation Script [Version 1.39] ~~~          
+echo           ~~~ Malware Execution Automation Script [Version 1.40] ~~~          
 echo                    (c) Anonymous VX22. All rights reserved.                 
 echo.
 echo.
@@ -1145,8 +1145,9 @@ exit
 
 set "event=%~1"
 
-for /f "tokens=2 delims==" %%b in ( 'wmic os get localdatetime /value' ) do (
+for /f "tokens=2 delims==" %%b in ('wmic os get localdatetime /value ^| more') do (
     set "datetime=%%b"
+    set "datetime=!datetime:~0,14!"
 )
 
 set "year=!datetime:~0,4!"
@@ -1158,41 +1159,38 @@ set "second=!datetime:~12,2!"
 
 if "!event!" equ "Timer.on" (
 
-    set /a "starthour=!hour!"
-    set /a "startminute=!minute!"
-    set /a "startsecond=!second!"
+    set /a "starthour=hour"
+    set /a "startminute=minute"
+    set /a "startsecond=second"
 
-    set /a "starttime=( !starthour!*3600 )+( !startminute!*60 )+( !startsecond! )"
+    set /a "starttime=(starthour*3600)+(startminute*60)+startsecond"
 
 ) else if "!event!" equ "Timer.off" (
 
-    set /a "endhour=!hour!"
-    set /a "endminute=!minute!"
-    set /a "endsecond=!second!"
+    set /a "endhour=hour"
+    set /a "endminute=minute"
+    set /a "endsecond=second"
 
-    set /a "endtime=( !endhour!*3600 )+( !endminute!*60 )+( !endsecond! )"
+    set /a "endtime=(endhour*3600)+(endminute*60)+endsecond"
 
     if !starttime! gtr !endtime! (
-        set /a "endtime=86400 + !endtime!"
+        set /a "endtime+=86400"
     )
 
-    set /a "elapsedseconds=!endtime! - !starttime!"
-    set /a "elapsedhours=!elapsedseconds! / 3600"
-    set /a "elapsedminutes=(( !elapsedseconds! )-( !elapsedhours!*3600 )) / 60"
-    set /a "elapsedseconds=!elapsedseconds! - (( !elapsedhours!*3600 )+( !elapsedminutes!*60 ))"
+    set /a "elapsedseconds=endtime - starttime"
+    set /a "elapsedhours=elapsedseconds / 3600"
+    set /a "elapsedseconds%%=3600"
+    set /a "elapsedminutes=elapsedseconds / 60"
+    set /a "elapsedseconds%%=60"
 
     if !elapsedhours! equ 0 (
         if !elapsedminutes! equ 0 (
             echo  Elapsed time: !elapsedseconds! second^(s^).
-
         ) else (
             echo  Elapsed time: !elapsedminutes! minute^(s^) and !elapsedseconds! second^(s^).
-
         )
-
     ) else (
         echo  Elapsed time: !elapsedhours! hour^(s^), !elapsedminutes! minute^(s^) and !elapsedseconds! second^(s^).
-
     )
 
 ) else (
@@ -1205,19 +1203,15 @@ if "!event!" equ "Timer.on" (
 
     if !hour! equ 0 (
         set "hour=12"
-
     ) else if !hour! gtr 12 (
         set /a "hour-=12"
-
         if !hour! lss 10 (
-          set "hour=0!hour!"
+            set "hour=0!hour!"
         )
-
     )
 
     set "formatteddt=!year!-!month!-!day!  !hour!:!minute!:!second! !ampm!"
     echo !formatteddt! - !event!>> %logfile%
-
 )
 
 exit /b
